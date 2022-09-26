@@ -13,13 +13,16 @@ export DOUBLE_CONVERSION_VER="v3.1.5"
 export BROTLI_VER="v1.0.9"
 export FLATBUFFERS_VER="v1.11.0"
 export THRIFT_VER="0.12.0"
-#export RAPIDJSON_VER="v1.1.0"
-
 
 
 export ARROW_VER="apache-arrow-8.0.0"
 
 export NLOHMANN_JSON_VER="v3.10.5"
+
+#dep for kspp (schema registry)
+export RAPIDJSON_VER="v1.1.0"
+
+
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 
@@ -158,20 +161,20 @@ make -j "$(getconf _NPROCESSORS_ONLN)" && \
 sudo make install && \
 cd ../..
 
-#wget -O rapidjson.tar.gz "https://github.com/miloyip/rapidjson/archive/$RAPIDJSON_VER.tar.gz" && \
-#mkdir -p rapidjson && \
-#tar \
-#   --extract \
-#   --file rapidjson.tar.gz \
-#   --directory rapidjson \
-#   --strip-components 1 && \
-#mkdir build && \
-#cd build && \
-#cmake -DRAPIDJSON_BUILD_EXAMPLES=OFF -DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_STANDARD=$CPP_STANDARD .. && \
-#make -j "$(getconf _NPROCESSORS_ONLN)" && \
-#sudo make install && \
-#sudo rm -rf /usr/local/share/doc/RapidJSON && \
-#cd ../..
+wget -O rapidjson.tar.gz "https://github.com/miloyip/rapidjson/archive/$RAPIDJSON_VER.tar.gz" && \
+mkdir -p rapidjson && \
+tar \
+   --extract \
+   --file rapidjson.tar.gz \
+   --directory rapidjson \
+   --strip-components 1 && \
+mkdir build && \
+cd build && \
+cmake -DRAPIDJSON_BUILD_EXAMPLES=OFF -DRAPIDJSON_BUILD_DOC=OFF -DRAPIDJSON_BUILD_TESTS=OFF -DBUILD_SHARED_LIBS=ON -DCMAKE_CXX_STANDARD=$CPP_STANDARD .. && \
+make -j "$(getconf _NPROCESSORS_ONLN)" && \
+sudo make install && \
+sudo rm -rf /usr/local/share/doc/RapidJSON && \
+cd ../..
 
 
 wget -O arrow.tar.gz "https://github.com/apache/arrow/archive/$ARROW_VER.tar.gz" && \
